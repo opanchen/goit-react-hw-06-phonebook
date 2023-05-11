@@ -1,42 +1,26 @@
-import css from './Filter.module.css';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getFilterValue } from 'redux/selectors';
-import { updateFilter } from 'redux/filterSlice';
+import { update } from 'redux/filterSlice';
+import css from './Filter.module.css';
 
-
-// import PropTypes from 'prop-types';
-
-
-export const Filter = ({value, onChange}) => {
+export const Filter = () => {
 
     const dispatch = useDispatch();
 
-    const filterValue = useSelector(getFilterValue);
-    console.log('filterValue: ', filterValue);
+    const filter = useSelector(getFilterValue);
 
     const changeFilter = (e) => {
-
-        console.log(e.currentTarget.value);
-        dispatch(updateFilter(e.currentTarget.value));
-
-        // setFilter(e.currentTarget.value)
-
+        dispatch(update(e.currentTarget.value));
     }
 
-    return(
+    return (
         <label className={css.filter}>
         Find contact by name
           <input 
           type="text" 
-          value={filterValue}
+          value={filter}
           onChange={changeFilter}
           />
         </label>
     )
 }
-
-// Filter.propTypes = {
-//     value: PropTypes.string.isRequired,
-//     onChange: PropTypes.func.isRequired,
-// }
